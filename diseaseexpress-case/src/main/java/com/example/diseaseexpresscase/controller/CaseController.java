@@ -11,6 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/case")
+@CrossOrigin
 public class CaseController {
     @Autowired
     CaseService caseService;

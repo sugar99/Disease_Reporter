@@ -10,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/disease")
+@CrossOrigin
 public class DiseaseController {
     @Autowired
     DiseaseService diseaseService;
