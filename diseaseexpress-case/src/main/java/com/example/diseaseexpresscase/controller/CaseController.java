@@ -25,6 +25,7 @@ public class CaseController {
     public Map<String, Object> addCase(@RequestBody(required = false) Case case1){
         //登录 权限控制
         Map<String, Object> resultMap = new HashMap<>();
+        System.out.println(case1);
         resultMap.put("status", 200);
         resultMap.put("msg", "添加病例成功");
         resultMap.put("date", caseService.addCase(case1));
@@ -68,7 +69,7 @@ public class CaseController {
 
         Case queryCase = new Case();
         queryCase.setDiseaseId(diseaseId);
-        queryCase.setDate(date);
+        queryCase.setCasedate(date);
         queryCase.setPlace(place);
         queryCase.setPatientId(patientId);
         queryCase.setUserId(userId);

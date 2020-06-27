@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "case")
+@Table(name = "disease_case")
 public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,7 +18,8 @@ public class Case {
     private Integer diseaseId;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column(name = "case_date", nullable = false)
+    private Date casedate;
 
     @Column(nullable = false, length = 50)
     private String place;

@@ -7,10 +7,7 @@ import com.example.diseaseexpresscase.service.CaseService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service("caseService")
 public class CaseServiceImpl implements CaseService {
@@ -34,7 +31,9 @@ public class CaseServiceImpl implements CaseService {
     @Override
     public List<Case> findCaseByInfo(Case caseInfo) {
         List<Case> list;
-        list = caseRepository.findByInfo(caseInfo.getDiseaseId(),caseInfo.getDate(),caseInfo.getPlace(),
+        //util.Date转sql.Date
+        java.sql.Date sqlDate = new java.sql.Date(caseInfo.getCasedate().getTime());
+        list = caseRepository.findByInfo(caseInfo.getDiseaseId(),sqlDate,caseInfo.getPlace(),
                 caseInfo.getPatientId(),caseInfo.getUserId());
 
         return list;
@@ -47,8 +46,8 @@ public class CaseServiceImpl implements CaseService {
         if(newCase.getDiseaseId()!=null && !"".equals(newCase.getDiseaseId())){
             old.setDiseaseId(newCase.getDiseaseId());
         }
-        if(newCase.getDate()!=null && !"".equals(newCase.getDate())){
-            old.setDate(newCase.getDate());
+        if(newCase.getCasedate()!=null && !"".equals(newCase.getCasedate())){
+            old.setCasedate(newCase.getCasedate());
         }
         if(newCase.getPlace()!=null && !"".equals(newCase.getPlace())){
             old.setPlace(newCase.getPlace());
