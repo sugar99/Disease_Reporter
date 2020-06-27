@@ -6,8 +6,6 @@ import com.yonyou.diseasereporter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,22 +75,31 @@ public class UserController {
         return resultMap;
     }
 
+    /**
+     * U4.更新用户信息
+     *
+     * @param newUser
+     * @return
+     */
     @PostMapping("/update")
     public Map<String,Object> updateUser(@RequestBody(required = false) User newUser){
         Map<String,Object> resultMap = new HashMap<>();
 
-        System.out.println(newUser);
-
         if(userService.updateUser(newUser)){
             resultMap.put("status", 200);
             resultMap.put("msg", "更新用户成功");
-
             resultMap.put("data", null);
         }
 
         return resultMap;
     }
 
+    /**
+     * U5.删除用户
+     *
+     * @param userId
+     * @return
+     */
     @GetMapping("/delete/{user_id")
     public Map<String,Object> delteUser(@PathVariable(name = "user_id", required = true) Integer userId){
         Map<String,Object> resultMap = new HashMap<>();

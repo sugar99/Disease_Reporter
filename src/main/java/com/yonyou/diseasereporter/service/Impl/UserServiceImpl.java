@@ -1,7 +1,6 @@
 package com.yonyou.diseasereporter.service.Impl;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yonyou.diseasereporter.model.User;
 import com.yonyou.diseasereporter.repository.UserRepository;
 import com.yonyou.diseasereporter.service.UserService;
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(Integer userId) {
         Optional<User> optional = userRepository.findById(userId);
-        User userFound = (optional.get() == null) ? new User() : optional.get();
+        User userFound = optional.isPresent() ? optional.get() : new User();
         return userFound;
     }
 
@@ -38,12 +37,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean updateUser(User newUser) {
+        User old = userRepository.findById(newUser.getUserId()).get();
+        if(newUser.getUname()!=null && !"".equals(newUser.getUname())){
+            old.setUname(newUser.getUname());
+        }
+        if(newUser.getPwd()!=null && !"".equals(newUser.getPwd())){
+            old.setPwd(newUser.getPwd());
+        }
+        if(newUser.getPlace()!=null && !"".equals(newUser.getPlace())){
+            old.setPlace(newUser.getPlace());
+        }
+        if(newUser.getLevel()!=null && !"".equals(newUser.getLevel())){
+            old.setLevel(newUser.getLevel());
+        }
+
+        userRepository.save(old);
         return true;
     }
 
     @Override
     public User deleteUser(Integer userId) {
-        return null;
+        Optional<User> optional = userRepository.findById(userId);
+        if(optional.isPresent()){
+            userRepository.deleteById(userId);
+            return optional.get();
+        }
+
+        return new User();
     }
 }

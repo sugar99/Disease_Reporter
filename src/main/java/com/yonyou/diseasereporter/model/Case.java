@@ -3,7 +3,7 @@ package com.yonyou.diseasereporter.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Entity

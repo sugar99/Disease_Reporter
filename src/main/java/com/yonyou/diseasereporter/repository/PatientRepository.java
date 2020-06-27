@@ -1,13 +1,14 @@
 package com.yonyou.diseasereporter.repository;
 
 import com.yonyou.diseasereporter.model.Patient;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PatientRepository {
+public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     /**
      * P3.查询患者（info）

@@ -56,13 +56,13 @@ class UserRepositoryTest {
     @Ignore
     void updateUser(){
         int id = 3;
-        Optional<User> optional = userRepository.findById(id);
+        User newUser = new User();
+        newUser.setUserId(5);
+        newUser.setPwd("111");
+        newUser.setUname("updated");
+        newUser.setLevel(5);
 
-        optional.ifPresent(user -> {
-            user.setUname("TestMod");
-            log.info("moded user:{}",user);
-            userRepository.save(user);
-        });
+        userRepository.update(newUser);
     }
 
     @Test
