@@ -1,0 +1,26 @@
+###服务启动端口号
+server:
+  port: 8200
+###服务名称(服务注册到eureka名称)
+spring:
+  application:
+    name: manger-client
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/disease-reporter?useSSL=true&serverTimezone=UTC&characterEncoding=utf-8&useUnicode=truee
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+
+
+###服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8100/eureka
